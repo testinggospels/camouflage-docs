@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>GRPC - Camouflage Service Virtualization</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "GRPC";
+        var mkdocs_page_input_path = "grpc.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Camouflage Service Virtualization
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Camouflage Service Virtualization</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../helpers/">Helpers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../http/">HTTP</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">GRPC</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#available-methods">Available methods</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#loadconfigfromjson-configfilepath-string-void">loadConfigFromJson = (configFilePath: string): void</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gethandlers-camouflagegrpchandler-undefined">getHandlers = (): CamouflageGrpcHandler | undefined</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gethelpers-helpers">getHelpers = (): Helpers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#addservice-service-grpcservicedefinition-implementation-grpcuntypedserviceimplementation-void">addService = (service: grpc.ServiceDefinition, implementation: grpc.UntypedServiceImplementation): void</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#start-async-promise">start = async (): Promise</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stop-async-promise">stop = async (): Promise</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hooks">Hooks</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#camouflage-grpc-configuration">Camouflage GRPC Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#folder-structure">Folder Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#camouflage-grpc-helpers">Camouflage GRPC Helpers</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#capture-helper">capture Helper</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-data-to-put-in-mock-files">What data to put in .mock files</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#unary-response">Unary Response</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#server-side-streaming-response">Server Side Streaming Response</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#client-side-streaming-response">Client Side Streaming Response</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bidi-streaming-response">Bidi Streaming Response</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#request-matching">Request matching</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Camouflage Service Virtualization</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">GRPC</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="grpc">GRPC</h1>
+<p>GRPC module of camouflage lets you mock your backends based on grpc protocols. You can create a camouflage grpc object from CamouflageGrpc class and configure it to serve mocks for your incoming requests.</p>
+<p>Start by installing required dependencies</p>
+<pre><code class="language-bash">npm i @camouflage/helpers @camouflage/grpc
+</code></pre>
+<ul>
+<li>You can create the camouflage object without any parameters, and load the required options as needed</li>
+</ul>
+<pre><code class="language-javascript">import CamouflageGrpc from &quot;@camouflage/grpc&quot;;
+import * as protoloader from &quot;@grpc/proto-loader&quot;;
+import * as grpc from &quot;@grpc/grpc-js&quot;;
+
+const camouflageGrpc: CamouflageGrpc = new CamouflageGrpc();
+camouflageGrpc.loadConfigFromJson(&quot;./config_grpc.json&quot;);
+
+//...add you services
+
+camouflageGrpc.start();
+</code></pre>
+<ul>
+<li>Or you can create the camouflage object with the options</li>
+</ul>
+<pre><code class="language-javascript">import CamouflageGrpc, { CamouflageGrpcConfig } from &quot;@camouflage/http&quot;;
+
+const config: CamouflageGrpcConfig = {};
+
+const camouflageGrpc: CamouflageGrpc = new CamouflageGrpc(config);
+camouflageGrpc.start();
+</code></pre>
+<h2 id="available-methods">Available methods</h2>
+<h6 id="loadconfigfromjson-configfilepath-string-void"><em>loadConfigFromJson = (configFilePath: string): void</em></h6>
+<p>While you can include your config as part of your code and ensure the types yourself, you may at times want to maintain the configuration for your camouflage server separate from the application code. This is usually a good practice from maintainability point of view, or even practical if you want to maintain multiple config files for different usecases.</p>
+<p>loadConfigFromJson lets you load a config via a .json file. You don't need to worry about validating your config file, Camouflage takes care of validating your config and prints relevant errors which help you fix your config files, if you miss something.</p>
+<h6 id="gethandlers-camouflagegrpchandler-undefined"><em>getHandlers = (): CamouflageGrpcHandler | undefined</em></h6>
+<p>Camouflage provides some ready to use handlers which you can use to load your services/methods into the camouflage grpc servers. Depending on the type of method your mocks require, you can use one of the following:</p>
+<ul>
+<li>unaryHandler</li>
+<li>serverSideStreamingHandler</li>
+<li>clientSideStreamingHandler</li>
+<li>bidiStreamingHandler</li>
+</ul>
+<h6 id="gethelpers-helpers"><em>getHelpers = (): Helpers</em></h6>
+<p>When you create a CamouflageGrpc object, it automatically creates an instance of helpers. You can use getHelpers() to get a reference to this helpers object. This is useful when you want add custom helpers that are specific to your requirements.</p>
+<pre><code class="language-javascript">import Helpers from &quot;@camouflage/helpers&quot;;
+
+const helpers: Helpers = camouflageGrpc.getHelpers();
+
+helpers.addHelper(&quot;ping&quot;, (context: any) =&gt; {
+  return &quot;pong&quot;;
+});
+
+camouflageGrpc.start();
+</code></pre>
+<p>You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the <a href="UPDATE THIS">helper source code</a></p>
+<h6 id="addservice-service-grpcservicedefinition-implementation-grpcuntypedserviceimplementation-void"><em>addService = (service: grpc.ServiceDefinition<grpc.UntypedServiceImplementation>, implementation: grpc.UntypedServiceImplementation): void</em></h6>
+<p><code>camouflageGrpc.addService</code> is wrapper on <code>@grpc/grpc-js</code> <code>addService</code> method. It allows you to load your proto package definitions/services/methods into camouflage's grpc server. In the following example we load the <code>blog.proto</code> definition into a grpcObject and use it to provide implementation of the <code>createBlog</code> and <code>listBlogs</code> methods required by the proto definition</p>
+<pre><code class="language-javascript">import CamouflageGrpc, { CamouflageGrpcHandler } from &quot;@camouflage/grpc&quot;;
+import * as protoloader from &quot;@grpc/proto-loader&quot;;
+import * as grpc from &quot;@grpc/grpc-js&quot;;
+const camouflageGrpc: CamouflageGrpc = new CamouflageGrpc();
+camouflageGrpc.loadConfigFromJson(&quot;./config_grpc.json&quot;);
+const handlers: CamouflageGrpcHandler | undefined = camouflageGrpc.getHandlers();
+
+const blogPackageDef: protoloader.PackageDefinition = protoloader.loadSync(&quot;./blog.proto&quot;, {});
+const blogGrpcObject: grpc.GrpcObject = grpc.loadPackageDefinition(blogPackageDef);
+const blogPackage = blogGrpcObject.blogPackage;
+
+if (handlers) {
+  // @ts-ignore
+  camouflageGrpc.addService(blogPackage.BlogService.service, {
+    createBlog: handlers.unaryHandler,
+    listBlogs: handlers.unaryHandler,
+  });
+}
+
+camouflageGrpc.start();
+</code></pre>
+<p>Here we are using camouflage's <code>unaryHandler</code> as the implementation of the required methods, but you might as well write your own implementation, making it easier to mock only the required methods instead of everything.</p>
+<h6 id="start-async-promise"><em>start = async (): Promise<void></em></h6>
+<p>Self explanatory. Starts the camouflage grpc server.</p>
+<h6 id="stop-async-promise"><em>stop = async (): Promise<void></em></h6>
+<p>Self explanatory. Stops the camouflage grpc server.</p>
+<h2 id="hooks">Hooks</h2>
+<h2 id="camouflage-grpc-configuration">Camouflage GRPC Configuration</h2>
+<p>You can provide following configuration options in your <code>config.json</code> file and load it to camouflage before you start the server</p>
+<pre><code class="language-json">{
+  &quot;log&quot;: {
+    &quot;enable&quot;: true, // enables or disables the logs
+    &quot;level&quot;: &quot;trace&quot; // // if enable=true, sets the log level. Available options are &quot;fatal&quot;, &quot;error&quot;, &quot;warn&quot;, &quot;info&quot;, &quot;debug&quot;, &quot;trace&quot;
+  },
+  &quot;host&quot;: &quot;0.0.0.0&quot;, // host part of the address on which you'd want grpc server to listen on
+  &quot;port&quot;: 8082, // port part of the address on which you'd want grpc server to listen on
+  &quot;ssl&quot;: {
+    &quot;enable&quot;: false, // enables or disabled ssl, if disabled credentials will be created using grpc.ServerCredentials.createInsecure()
+    &quot;cert&quot;: &quot;location/to/server.cert&quot;, // if enable=true, required config for .cert file
+    &quot;key&quot;: &quot;location/to/server/key&quot;, // if enable=true, required config for .key file
+    &quot;rootCert&quot;: &quot;location/to/rootCert&quot; // Optionally, provide location to root cert
+  },
+  &quot;mocksDir&quot;: &quot;./grpcMocks&quot;, // location of the mocks folder
+  &quot;monitoring&quot;: {
+    &quot;enable&quot;: true, // enables or disables monitoring
+    &quot;port&quot;: 40000 // required port for monitoring server
+  }
+}
+</code></pre>
+<h2 id="folder-structure">Folder Structure</h2>
+<p>The way you organize your directories inside the mocksDir, determine how your endpoints will be available. Assuming that you have configured your mocksDir as ./grpcMocks, the folder structure would follow the pattern as shown below.</p>
+<p>Let's take a look at this proto file</p>
+<pre><code class="language-protobuf">syntax = &quot;proto3&quot;;
+
+package foo.todoPackage;
+
+import &quot;./todoEnum.proto&quot;;
+
+service TodoService{
+    rpc readTodo(Empty) returns (Todos);
+    rpc readTodoStream(Empty) returns (stream Todo);
+    rpc createTodoStream(stream Todo) returns (Todos);
+    rpc createTodoBidiStream(stream Todo) returns (stream Todo);
+}
+</code></pre>
+<p>The expected mock file path for each required methods would be:</p>
+<ul>
+<li>./grpcMocks/foo/todoPackage/readTodo.mock</li>
+<li>./grpcMocks/foo/todoPackage/readTodoStream.mock</li>
+<li>./grpcMocks/foo/todoPackage/createTodoStream.mock</li>
+<li>./grpcMocks/foo/todoPackage/createTodoBidiStream.mock</li>
+</ul>
+<h2 id="camouflage-grpc-helpers">Camouflage GRPC Helpers</h2>
+<h3 id="capture-helper"><code>capture</code> Helper</h3>
+<p>Usage:</p>
+<ul>
+<li><strong>{{capture from='metadata' key='firstName'}}</strong> - Pretty self-explanatory, but if you want to capture some data from the request metadata, you can do so by providing the required key.</li>
+<li><strong>{{capture from='request' using="jsonpath" selector='$.title'}}</strong> - To capture values from the actual request, your options are either <code>using='regex'</code> or <code>using='jsonpath'</code>. Selector will change accordingly.</li>
+</ul>
+<h2 id="what-data-to-put-in-mock-files">What data to put in .mock files</h2>
+<h4 id="unary-response">Unary Response</h4>
+<p>A typical unary response mock file would look like following snippet</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: {{num_between lower=100 upper=500}},
+  &quot;title&quot;: &quot;something&quot;,
+  &quot;metadata&quot;: {
+    &quot;headers&quot;: {
+      &quot;random&quot;: &quot;{{random}}&quot;
+    },
+    &quot;trailers&quot;: {
+      &quot;now&quot;: &quot;{{now format='epoch'}}&quot;,
+      &quot;random&quot;: &quot;{{random}}&quot;
+    }
+  },
+  &quot;delay&quot;: 2000
+}
+</code></pre>
+<p>You only need to provide the a json object matching your expected response. In our example, let's say we are creating a mock for <code>createBlog</code> unary method which return a <code>Blog</code> as shown below</p>
+<pre><code class="language-protobuf">syntax = &quot;proto3&quot;;
+
+package blogPackage;
+
+message Blog {
+    int32 id = 1;
+    string title = 2;
+}
+
+service BlogService{
+    rpc createBlog(Blog) returns (Blog);
+}
+</code></pre>
+<p>Corresponding to our <code>Blog</code> schema as per the proto file, we are responding with an random integer between 100-500 using <code>num_between</code> helper. And a random string as title using <code>random</code> helper. Optionally, you can also send metadata, i.e. headers or trailers or both, as shown in the example above. And finally, and optionally, you can simulate a delay of 2 seconds, by including <code>delay: 2000</code> field. And you might already know by now, you can make the delay random by using the <code>num_between</code> helper.</p>
+<h4 id="server-side-streaming-response">Server Side Streaming Response</h4>
+<p>Mock file for server side streaming response would be mostly similar to unary, except for one distinction. Since we are streaming a response back to client, you'll be providing multiple responses. You can do so by separating each response by a delimiter, i.e. "====" (four equals). Other than that, as you would in unary response, metadata.headers, metadata.trailers and delay are optional properties</p>
+<pre><code class="language-json">{
+    &quot;id&quot;: &quot;{{random type='UUID'}}&quot;,
+    &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;,
+    &quot;delay&quot;: {{num_between lower=500 upper=600}}
+}
+====
+{
+    &quot;id&quot;: &quot;{{random type='UUID'}}&quot;,
+    &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;,
+    &quot;delay&quot;: {{num_between lower=500 upper=600}}
+}
+====
+{
+    &quot;id&quot;: &quot;{{random type='UUID'}}&quot;,
+    &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;,
+    &quot;delay&quot;: {{num_between lower=500 upper=600}}
+}
+====
+{
+    &quot;id&quot;: &quot;{{random type='UUID'}}&quot;,
+    &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;,
+    &quot;delay&quot;: {{num_between lower=500 upper=600}}
+}
+</code></pre>
+<h4 id="client-side-streaming-response">Client Side Streaming Response</h4>
+<p>Client streaming and unary responses are identical.</p>
+<pre><code class="language-json">{
+    &quot;todos&quot;: [
+        {
+            &quot;id&quot;: &quot;{{random type='UUID'}}&quot;,
+            &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;
+        },
+        {
+            &quot;id&quot;: &quot;{{random type='UUID'}}&quot;,
+            &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;
+        },
+        {
+            &quot;id&quot;: &quot;{{randomValue type='UUID'}}&quot;,
+            &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;
+        }
+    ],
+    &quot;metadata&quot;: {
+        &quot;trailers&quot;:{
+            &quot;key&quot;: &quot;value&quot;
+        }
+    },
+    &quot;delay&quot;: {{num_between lower=500 upper=600}}
+}
+</code></pre>
+<h4 id="bidi-streaming-response">Bidi Streaming Response</h4>
+<p>Bidi streaming supported currently by camouflage is like ping-pong in nature. For each request you stream to the server, you get one response back.</p>
+<p>Bidi streaming responses differ from the other responses. Your mockfile would include a required object <code>data</code>. This is what camouflage will respond back for each of your requests. You can include an optional <code>end</code> object, which would be sent when you end the client side stream. This is an optional object, in absence of which, camouflage will simply end the server side stream without any response.</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;{{random type='UUID'}}&quot;,
+    &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;
+  },
+  &quot;end&quot;: {
+    &quot;id&quot;: &quot;{{random type='UUID'}}&quot;,
+    &quot;text&quot;: &quot;{{random type='ALPHABETIC' length='100'}}&quot;
+  }
+}
+</code></pre>
+<h2 id="request-matching">Request matching</h2>
+<p>Request matching in camouflage grpc module can be done with a combination of helpers like <code>if</code>, <code>unless</code> and <code>is</code> along with <code>capture</code> helper.</p>
+<p>GRPC <code>capture</code> helper has access to <code>request</code> and <code>metadata</code> objects from your requests. Usage can be found in the helper section <a href="#camouflage-grpc-helpers">above</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Structure of <code>request</code> object might vary depending on the calls you are making. For example:</p>
+<ul>
+<li><strong>Unary</strong>: In this case, request object is what you would expect it to be. The object you send from the client, as is.</li>
+<li><strong>Server Side Streaming</strong>: Since you make one call from client, and recieve n streams in response as defined in your mock file, same request object is available for each of your responses.</li>
+<li><strong>Client Side Streaming</strong>: All of your request objects are stored in an array, and this array of objects (instead of an object), is made available to your response</li>
+<li><strong>Bidi Streaming</strong>: In this case, request object that you send from the client, is available for each of streams. However the <code>end</code> object that you create, would have access to the array of all request objects sent.</li>
+</ul>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../http/" class="btn btn-neutral float-left" title="HTTP"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../http/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
