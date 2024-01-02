@@ -1,0 +1,11 @@
+site_name: Camouflage Service Virtualization
+theme: readthedocs
+markdown_extensions:
+  - admonition
+  - attr_list
+nav:
+  - index.md
+  - getting-started.md
+  - helpers.md
+  - http.md
+  - grpc.md
