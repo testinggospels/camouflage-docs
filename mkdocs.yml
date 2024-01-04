@@ -1,4 +1,4 @@
-site_name: Camouflage Service Virtualization
+site_name: Camoflage Service Virtualization
 theme: readthedocs
 markdown_extensions:
   - admonition

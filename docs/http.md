@@ -1,77 +1,77 @@
 # HTTP
 
-HTTP module of camouflage lets you mock your backends based on **http, https and http2** protocols. You can create a camouflage http object from `CamouflageHttp` class and configure it to serve mocks for your incoming requests.
+HTTP module of Camoflage lets you mock your backends based on **http, https and http2** protocols. You can create a Camoflage http object from `CamoflageHttp` class and configure it to serve mocks for your incoming requests.
 
 Start by installing required dependencies
 
 ```bash
-npm i @camouflage/helpers @camouflage/http
+npm i @camoflage/helpers @camoflage/http
 ```
 
-- You can create the camouflage object without any parameters, and load the required options as needed
+- You can create the Camoflage object without any parameters, and load the required options as needed
 
 ```javascript
-import CamouflageHttp from "@camouflage/http";
+import CamoflageHttp from "@camoflage/http";
 
-const camouflageHttp: CamouflageHttp = new CamouflageHttp();
+const CamoflageHttp: CamoflageHttp = new CamoflageHttp();
 
-camouflageHttp.loadConfigFromJson("./config.json");
-camouflageHttp.setServerOptions(options);
-camouflageHttp.setSecureServerOptions(options);
-camouflageHttp.setupCacheWithOptions(options);
-camouflageHttp.setupCorsWithOptions(options);
+CamoflageHttp.loadConfigFromJson("./config.json");
+CamoflageHttp.setServerOptions(options);
+CamoflageHttp.setSecureServerOptions(options);
+CamoflageHttp.setupCacheWithOptions(options);
+CamoflageHttp.setupCorsWithOptions(options);
 
-camouflageHttp.start();
+CamoflageHttp.start();
 ```
 
-- Or you can create the camouflage object with the options
+- Or you can create the Camoflage object with the options
 
 ```javascript
-import CamouflageHttp, { CamouflageHttpConfig } from "@camouflage/http";
+import CamoflageHttp, { CamoflageHttpConfig } from "@camoflage/http";
 import type http from "http";
 import type https from "https";
 import type apicache from "apicache";
 import type cors from "cors";
 
-const config: CamouflageHttpConfig = {};
+const config: CamoflageHttpConfig = {};
 const httpOptions: http.ServerOptions = {};
 const httpsOptions: https.ServerOptions = {};
 const cacheOptions: apicache.Options = {};
 const corsOptions: cors.Options = {};
 
-const camouflageHttp: CamouflageHttp = new CamouflageHttp(config, httpOptions, httpsOptions, cacheOptions, corsOptions);
-camouflageHttp.start();
+const CamoflageHttp: CamoflageHttp = new CamoflageHttp(config, httpOptions, httpsOptions, cacheOptions, corsOptions);
+CamoflageHttp.start();
 ```
 
 ## Available methods
 
 ###### _getHelpers = (): Helpers_
 
-When you create a CamouflageHttp object, it automatically creates an instance of helpers. You can use `getHelpers()` to get a reference to this helpers object. This is useful when you want add custom helpers that are specific to your requirements.
+When you create a CamoflageHttp object, it automatically creates an instance of helpers. You can use `getHelpers()` to get a reference to this helpers object. This is useful when you want add custom helpers that are specific to your requirements.
 
 ```javascript
-import Helpers from "@camouflage/helpers";
+import Helpers from "@camoflage/helpers";
 
-const helpers: Helpers = camouflageHttp.getHelpers();
+const helpers: Helpers = CamoflageHttp.getHelpers();
 
 helpers.addHelper("ping", (context: any) => {
   return "pong";
 });
 
-camouflageHttp.start();
+CamoflageHttp.start();
 ```
 
 You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the [helper source code](UPDATE THIS).
 
 ###### _loadConfigFromJson(configFilePath: string): void_
 
-While you can include your config as part of your code and ensure the types yourself, you may at times want to maintain the configuration for your camouflage server separate from the application code. This is usually a good practice from maintainability point of view, or even practical if you want to maintain multiple config files for different usecases.
+While you can include your config as part of your code and ensure the types yourself, you may at times want to maintain the configuration for your Camoflage server separate from the application code. This is usually a good practice from maintainability point of view, or even practical if you want to maintain multiple config files for different usecases.
 
-`loadConfigFromJson` lets you load a config via a .json file. You don't need to worry about validating your config file, Camouflage takes care of validating your config and prints relevant errors which help you fix your config files, if you miss something.
+`loadConfigFromJson` lets you load a config via a .json file. You don't need to worry about validating your config file, Camoflage takes care of validating your config and prints relevant errors which help you fix your config files, if you miss something.
 
 ###### _setServerOptionsHttp(options: http.ServerOptions): void_
 
-Depending on your use case, you might want to set additional options. Use `setServerOptionsHttp2` to pass those options to camouflage server. Read more about the available options in the official [documentation](https://nodejs.org/api/http.html#httpcreateserveroptions-requestlistener)
+Depending on your use case, you might want to set additional options. Use `setServerOptionsHttp2` to pass those options to Camoflage server. Read more about the available options in the official [documentation](https://nodejs.org/api/http.html#httpcreateserveroptions-requestlistener)
 
 ###### _setServerOptionsHttps(options: https.ServerOptions): void_
 
@@ -83,7 +83,7 @@ In case you are creating an http2 server, you would need to use `setServerOption
 
 ###### _setupCacheWithOptions(options: apicache.Options): void_
 
-Camouflage HTTP uses, `apicache` to configure a cache middleware for your mocks. By default, the cache is saved in memory and you can provide a ttl in seconds via config. However in case you want more control over the options, you can fine tune the settings using `setupCacheWithOptions`.
+Camoflage HTTP uses, `apicache` to configure a cache middleware for your mocks. By default, the cache is saved in memory and you can provide a ttl in seconds via config. However in case you want more control over the options, you can fine tune the settings using `setupCacheWithOptions`.
 
 Following example shows how you can cache with redis instead of in memory.
 
@@ -105,15 +105,15 @@ let cacheOptions: apicache.Options = {
   // more options
 };
 
-camouflageHttp.setupCacheWithOptions(cacheOptions);
-camouflageHttp.start();
+CamoflageHttp.setupCacheWithOptions(cacheOptions);
+CamoflageHttp.start();
 ```
 
 You can refer to [apicache documentation](https://www.npmjs.com/package/apicache#available-options-first-value-is-default) for more details on the available options and how to configure them.
 
 ###### _setupCorsWithOptions(corsOptions: cors.CorsOptions): void_
 
-Camouflage uses `cors` middleware to configure cors for your mocks. By default, cors is enabled for all origins and methods, however you can control this by providing camouflage a corsOptions before you start the server.
+Camoflage uses `cors` middleware to configure cors for your mocks. By default, cors is enabled for all origins and methods, however you can control this by providing Camoflage a corsOptions before you start the server.
 
 ```javascript
 import type cors from "cors";
@@ -122,8 +122,8 @@ const corsOptions: cors.Options = {
   origin: ["http://localhost:3000", "http://instrukti.com/"],
   methods: "GET,POST",
 };
-camouflageHttp.setupCorsWithOptions(corsOptions);
-camouflageHttp.start();
+CamoflageHttp.setupCorsWithOptions(corsOptions);
+CamoflageHttp.start();
 ```
 
 Read more about available options on [cors documentation](https://www.npmjs.com/package/cors#configuration-options).
@@ -136,29 +136,29 @@ Allows you to setup validations using an Open API 3 specification. Read more on 
 
 Allows you to setup compression options provided by [compression middleware](https://www.npmjs.com/package/compression#options). Read more on usage in the [compression](#compression) section.
 
-###### _addHook = (route: string, event: "onRequest" | "beforeResponse" | "afterResponse", fn: CamouflageHook): void_
+###### _addHook = (route: string, event: "onRequest" | "beforeResponse" | "afterResponse", fn: CamoflageHook): void_
 
-Apart from the camouflage helpers, ability to create custom helpers, camouflage allows you to add hooks to specific routes. You can add hooks to listen to certain events and manipulate the request/response as you wish.
+Apart from the Camoflage helpers, ability to create custom helpers, Camoflage allows you to add hooks to specific routes. You can add hooks to listen to certain events and manipulate the request/response as you wish.
 
 Available hooks are:
 
-1. **onRequest**: `onRequest` hooks are executed as soon as camouflage recieves the request. You can use `onRequest` hooks to intercept the incoming request. You can either **make some changes to your incoming request object** and then let camouflage run the response builder on the modified request, or **bypass the camouflage response builder entirely** and send the response from within the hook itself without refering to any mock files.
-2. **beforeResponse**: `beforeResponse` hooks are executed right before camouflage is about to send the response. `beforeResponse` hooks are useful when you want camouflage response builder to use the provided mock file to build a response, however you want to modify the response before it's sent.
-3. **afterResponse**: `afterResponse` hooks are executed once camouflage has sent the response. `afterResponse` hooks is useful for logging or other such activities.
+1. **onRequest**: `onRequest` hooks are executed as soon as Camoflage recieves the request. You can use `onRequest` hooks to intercept the incoming request. You can either **make some changes to your incoming request object** and then let Camoflage run the response builder on the modified request, or **bypass the Camoflage response builder entirely** and send the response from within the hook itself without refering to any mock files.
+2. **beforeResponse**: `beforeResponse` hooks are executed right before Camoflage is about to send the response. `beforeResponse` hooks are useful when you want Camoflage response builder to use the provided mock file to build a response, however you want to modify the response before it's sent.
+3. **afterResponse**: `afterResponse` hooks are executed once Camoflage has sent the response. `afterResponse` hooks is useful for logging or other such activities.
 
 In the following section, you'll see how we can configure and use these hooks.
 
 ###### _start(): void_
 
-Self explanatory. Starts the camouflage http server.
+Self explanatory. Starts the Camoflage http server.
 
 ###### _stop(): void_
 
-Self explanatory. Stops the camouflage http server.
+Self explanatory. Stops the Camoflage http server.
 
 ###### _restart(): void_
 
-Self explanatory. Restarts the camouflage http server.
+Self explanatory. Restarts the Camoflage http server.
 
 ## Hooks
 
@@ -167,29 +167,29 @@ Self explanatory. Restarts the camouflage http server.
 In the following example, we'll see how can we use `onRequest` hook to intercept the incoming request:
 
 ```javascript
-camouflageHttp.addHook("/user/:userId/wallet/:walletId", "onRequest", (req, res) => {
+CamoflageHttp.addHook("/user/:userId/wallet/:walletId", "onRequest", (req, res) => {
   console.log("Hello from hook", req.route.path); // You can do some logging
   res.set("Sent-From", "onRequestHook"); // You can set some headers
   // You can check some conditions
   if (req.param.userId === 1) {
-    // If the condition passes, you can choose to bypass camouflage entirely by sending the response from within the hook
+    // If the condition passes, you can choose to bypass Camoflage entirely by sending the response from within the hook
     res.set("Content-Type", "application/json");
     const body = {
       message: "Sent from onRequestHook",
     };
     res.status(200).send(JSON.stringify(body));
   }
-  // Or you can do nothing and let camouflage take over after you are done modifying the request/response objects
+  // Or you can do nothing and let Camoflage take over after you are done modifying the request/response objects
 });
 ```
 
 #### `beforeResponse`
 
-Similarily you can use `beforeResponse`, to intercept and manipulate the responses generated by camouflage response builder
+Similarily you can use `beforeResponse`, to intercept and manipulate the responses generated by Camoflage response builder
 
 ```javascript
-camouflage.addHook("/user/:userId/wallet/:walletId", "beforeResponse", (req, res, camouflageResponse: CamouflageResponse | undefined) => {
-  if (camouflageResponse) console.log(camouflageResponse);
+camoflageHttp.addHook("/user/:userId/wallet/:walletId", "beforeResponse", (req, res, camoflageResponse: CamoflageResponse | undefined) => {
+  if (camoflageResponse) console.log(camoflageResponse);
   res.set("Added-In-Hook", "SomeHeader");
 });
 ```
@@ -201,11 +201,11 @@ Finally, you can use `afterResponse` hooks to measure time or log some messages 
 ```javascript
 let time = 0;
 let startTime = 0;
-camouflageHttp.addHook("/user/:userId/wallet/:walletId", "onRequest", (req, res) => {
+CamoflageHttp.addHook("/user/:userId/wallet/:walletId", "onRequest", (req, res) => {
   startTime = Date.now();
   console.log("Hello from hook", req.route.path);
 });
-camouflageHttp.addHook("/user/:userId/wallet/:walletId", "afterResponse", (req, res) => {
+CamoflageHttp.addHook("/user/:userId/wallet/:walletId", "afterResponse", (req, res) => {
   time = Date.now() - startTime;
   console.log(time);
   time = 0;
@@ -213,9 +213,9 @@ camouflageHttp.addHook("/user/:userId/wallet/:walletId", "afterResponse", (req, 
 });
 ```
 
-## Camouflage Http Configuration
+## Camoflage Http Configuration
 
-You can provide following configuration options in your `config.json` file and load it to camouflage before you start the server
+You can provide following configuration options in your `config.json` file and load it to Camoflage before you start the server
 
 ```json
 {
@@ -257,7 +257,7 @@ The way you organize your directories inside the `mocksDir`, determine how your 
 
 ```javascript
 HTTP/1.1 200 OK
-X-Provided-By: CamouflageHttp
+X-Provided-By: CamoflageHttp
 Content-Type: application/json
 
 {
@@ -283,17 +283,17 @@ Content-Type: application/json
 
 !!! note
 
-    Notice the use of `helpers` in the above mock. Alongwith the inbuilt `now` helper, camouflage http module provides some additional helpers, `capture` being one of them. In the following section, you can read more about additional helpers that specific to http module.
+    Notice the use of `helpers` in the above mock. Alongwith the inbuilt `now` helper, Camoflage http module provides some additional helpers, `capture` being one of them. In the following section, you can read more about additional helpers that specific to http module.
 
 Similarly you can create PUT.mock, DELETE.mock etc in your intended path as required by your mocked endpoint.
 
 !!! warning
 
-    If you are coming from the previous version of Camouflage, note that we have dropped support for wildcards i.e. __ / double underscores. They were primarily intended to be used for dynamic path params which are now handled the way express handles them, which makes it more robust and easy to understand.
+    If you are coming from the previous version of Camoflage, note that we have dropped support for wildcards i.e. __ / double underscores. They were primarily intended to be used for dynamic path params which are now handled the way express handles them, which makes it more robust and easy to understand.
 
-## Camouflage HTTP Helpers
+## Camoflage HTTP Helpers
 
-In addition to the available helpers that come with `@camouflage/helpers` module, camouflage http module provides some protocol specific helpers.
+In addition to the available helpers that come with `@camoflage/helpers` module, Camoflage http module provides some protocol specific helpers.
 
 ### `capture` Helper
 
@@ -321,7 +321,7 @@ Usage:
 ```javascript
 HTTP/1.1 200 OK
 
-{{file path="./docs/camouflage.png"}}
+{{file path="./docs/camoflage.png"}}
 ```
 
 ### `state` Helper
@@ -373,13 +373,13 @@ cy.setState("cart", [
 
 ## What data to put in .mock files
 
-Camouflage expects a raw HTTP Response to be placed in the .mock files. Please refer to this [Wikipedia](https://en.wikipedia.org/wiki/HTTP_message_body) page, if you are not sure what the response looks like.
+Camoflage expects a raw HTTP Response to be placed in the .mock files. Please refer to this [Wikipedia](https://en.wikipedia.org/wiki/HTTP_message_body) page, if you are not sure what the response looks like.
 
 Each mock file can have the HTTP Responses in following manner:
 
 - One response per .mock file.
-- Multiple responses in one .mock file with conditions defined to help Camouflage decide which response should be sent under what conditions. (Read Handlebars section for more)
-- Multiple responses separated by Camouflage's delimiter i.e. "====" (four equals). Camouflage will pick one response at random and send it to the client. An example of this can be found here
+- Multiple responses in one .mock file with conditions defined to help Camoflage decide which response should be sent under what conditions. (Read Handlebars section for more)
+- Multiple responses separated by Camoflage's delimiter i.e. "====" (four equals). Camoflage will pick one response at random and send it to the client. An example of this can be found here
 
 The data you want in your mock file can be easily fetched using a curl command with -i -X flags as shown in the example below.
 
@@ -453,9 +453,9 @@ Another, easier, approach to create mocks is by installing the [REST Client VS C
 
 !!! note
 
-    Camouflage by default looks for the OS specific line breaks. For example, if you are on MacOS or Unix based systems, the default line break/new line is `\n`, whereas on windows it's `\r\n`. This is known to cause issues if your development environment and testing environment are different for Camouflage. For example, if you have created your mock file on a windows machine and uploaded it to a Camouflage server running on linux, your mocks might not work as expected. Or in case your text editor's line break settings do not match your OS default line break, you might not get an expected response.
+    Camoflage by default looks for the OS specific line breaks. For example, if you are on MacOS or Unix based systems, the default line break/new line is `\n`, whereas on windows it's `\r\n`. This is known to cause issues if your development environment and testing environment are different for Camoflage. For example, if you have created your mock file on a windows machine and uploaded it to a Camoflage server running on linux, your mocks might not work as expected. Or in case your text editor's line break settings do not match your OS default line break, you might not get an expected response.
 
-    Though Camouflage detects new lines used in the file irrespective of the OS default, you should not face any issues. However, if you face any issues where you are getting a blank response or any unexpected response, please create an issue attaching your log files. REMEMBER TO REMOVE SENSITIVE DATA, IF ANY, FROM YOUR LOGS.
+    Though Camoflage detects new lines used in the file irrespective of the OS default, you should not face any issues. However, if you face any issues where you are getting a blank response or any unexpected response, please create an issue attaching your log files. REMEMBER TO REMOVE SENSITIVE DATA, IF ANY, FROM YOUR LOGS.
 
 ## Request Matching
 
@@ -475,7 +475,7 @@ Start by creating a `GET.mock` file at the location `./mocks/hello`. Paste the f
 ```javascript
 {{#if request.query.name}}
 HTTP/1.1 200 OK
-X-Provided-By: CamouflageHttp
+X-Provided-By: CamoflageHttp
 Content-Type: application/json
 
 {
@@ -486,7 +486,7 @@ Content-Type: application/json
 }
 {{else}}
 HTTP/1.1 200 OK
-X-Provided-By: CamouflageHttp
+X-Provided-By: CamoflageHttp
 Content-Type: application/json
 
 {
@@ -498,7 +498,7 @@ Content-Type: application/json
 {{/if}}
 ```
 
-In the example above, we have provided two responses that camouflage can pick from, one with `greeting: "Hello World"`, and another with `greeting: "Hello John"`. In the first line of the mock `{{#if request.query.name}}`, we are checking for the condition, if there exists a query parameter called `name`. And that's it. If your request is made with the query param `name`, camouflage will respond with first response, if not then the 2nd second response is what you get. And the value of `name` can be anything. We are using `capture` helper to help us make our response dynamic.
+In the example above, we have provided two responses that Camoflage can pick from, one with `greeting: "Hello World"`, and another with `greeting: "Hello John"`. In the first line of the mock `{{#if request.query.name}}`, we are checking for the condition, if there exists a query parameter called `name`. And that's it. If your request is made with the query param `name`, Camoflage will respond with first response, if not then the 2nd second response is what you get. And the value of `name` can be anything. We are using `capture` helper to help us make our response dynamic.
 
 !!! note
 
@@ -550,7 +550,7 @@ Content-Type: application/json
 
 ### Request model
 
-Request object made available by Camouflage is simply an instance of express request object for a given incoming request. Following are the properties/objects available on the request object which can be used in request matching or to extract information out of the request.
+Request object made available by Camoflage is simply an instance of express request object for a given incoming request. Following are the properties/objects available on the request object which can be used in request matching or to extract information out of the request.
 
 - request.baseUrl
 - request.body
@@ -592,14 +592,14 @@ Response-Delay: {{num_between lower=500 upper=600}}
 
 ## OpenAPI Conversion
 
-If you have access to the OpenAPI specification for the APIs/Endpoints you want to mock, Camouflage supports the conversion via the `camoswag` utility.
+If you have access to the OpenAPI specification for the APIs/Endpoints you want to mock, Camoflage supports the conversion via the `camoswag` utility.
 
 - To use `camoswag`, you would need your OpenAPI specification file in either .json or .yaml format.
 - You don't need to install `camoswag` locally on your machine, you can simply run the script using npx.
 - Run the command: `npx camoswag --spec ./swagger.yaml` or `npx camoswag --spec ./swagger.json`. (Replace file location with your spec file location)
 - If you would like to install camoswag locally, you can do so by running the command: `npm i -g camoswag`. For conversion use, `camoswag --spec ./swagger.yaml`
-- This would create a new folder with the name `camouflage-${current_timestamp}` containing the required folder structure and mock files corresponding to each endpoint defined in your spec file.
-- You can either delete or modify the dummy responses placed in the mockfiles as per your expectations. Once you are satisfied with the modifications, you can move the contents of the folder to your original `mocksDir` of your running Camouflage server.
+- This would create a new folder with the name `camoflage-${current_timestamp}` containing the required folder structure and mock files corresponding to each endpoint defined in your spec file.
+- You can either delete or modify the dummy responses placed in the mockfiles as per your expectations. Once you are satisfied with the modifications, you can move the contents of the folder to your original `mocksDir` of your running Camoflage server.
 - Note that if your spec file doesn't contain a response defined for a given endpoint, `camoswag` would put the following default response in the mock file.
 
 ```javascript
@@ -614,7 +614,7 @@ If you have access to the OpenAPI specification for the APIs/Endpoints you want 
 
 ## OpenAPI Validation
 
-Camouflage uses `express-openapi-validator` to enable you to validate your requests/responses against a provided OpenAPI 3 schema.
+Camoflage uses `express-openapi-validator` to enable you to validate your requests/responses against a provided OpenAPI 3 schema.
 
 You can configure validation in two ways.
 
@@ -622,7 +622,7 @@ You can configure validation in two ways.
 
 ```json
 {
-  // Other camouflage options
+  // Other Camoflage options
   "validation": {
     "enable": true,
     "apiSpec": "./apiSpec.yaml",
@@ -634,13 +634,13 @@ You can configure validation in two ways.
 
 Modify the above config as per your requirements, and you are good to go.
 
-- **Advanced Usage:** If you want more control over how to configure validation, you can set the [supported validation options](https://github.com/cdimascio/express-openapi-validator/wiki/Documentation#advanced-usage) via the camouflage method `setupValidationWithOptions`
+- **Advanced Usage:** If you want more control over how to configure validation, you can set the [supported validation options](https://github.com/cdimascio/express-openapi-validator/wiki/Documentation#advanced-usage) via the Camoflage method `setupValidationWithOptions`
 
 Enable it via config
 
 ```json
 {
-  // Other camouflage options
+  // Other Camoflage options
   "validation": {
     "enable": true
   }
@@ -650,7 +650,7 @@ Enable it via config
 And then configure rest of the options as you wish
 
 ```javascript
-camouflageHttp.setupValidationWithOptions({
+CamoflageHttp.setupValidationWithOptions({
   apiSpec: "./openapi.yaml",
   validateRequests: true,
   validateResponses: true,
@@ -666,7 +666,7 @@ Enable compression in config.json
 
 ```json
 {
-  // Other camouflage options
+  // Other Camoflage options
   "compression": true
 }
 ```
@@ -683,5 +683,5 @@ function shouldCompress(req, res) {
   // fallback to standard filter function
   return compression.filter(req, res);
 }
-camouflageHttp.setupCompressionWithOptions({ filter: shouldCompress });
+CamoflageHttp.setupCompressionWithOptions({ filter: shouldCompress });
 ```

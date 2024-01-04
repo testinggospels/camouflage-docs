@@ -1,50 +1,50 @@
 # GRPC
 
-GRPC module of camouflage lets you mock your backends based on grpc protocols. You can create a camouflage grpc object from CamouflageGrpc class and configure it to serve mocks for your incoming requests.
+GRPC module of Camoflage lets you mock your backends based on grpc protocols. You can create a Camoflage grpc object from CamoflageGrpc class and configure it to serve mocks for your incoming requests.
 
 Start by installing required dependencies
 
 ```bash
-npm i @camouflage/helpers @camouflage/grpc
+npm i @camoflage/helpers @camoflage/grpc
 ```
 
-- You can create the camouflage object without any parameters, and load the required options as needed
+- You can create the Camoflage object without any parameters, and load the required options as needed
 
 ```javascript
-import CamouflageGrpc from "@camouflage/grpc";
+import CamoflageGrpc from "@camoflage/grpc";
 import * as protoloader from "@grpc/proto-loader";
 import * as grpc from "@grpc/grpc-js";
 
-const camouflageGrpc: CamouflageGrpc = new CamouflageGrpc();
-camouflageGrpc.loadConfigFromJson("./config_grpc.json");
+const camoflageGrpc: CamoflageGrpc = new CamoflageGrpc();
+camoflageGrpc.loadConfigFromJson("./config_grpc.json");
 
 //...add you services
 
-camouflageGrpc.start();
+camoflageGrpc.start();
 ```
 
-- Or you can create the camouflage object with the options
+- Or you can create the Camoflage object with the options
 
 ```javascript
-import CamouflageGrpc, { CamouflageGrpcConfig } from "@camouflage/http";
+import CamoflageGrpc, { CamoflageGrpcConfig } from "@camoflage/grpc";
 
-const config: CamouflageGrpcConfig = {};
+const config: CamoflageGrpcConfig = {};
 
-const camouflageGrpc: CamouflageGrpc = new CamouflageGrpc(config);
-camouflageGrpc.start();
+const camoflageGrpc: CamoflageGrpc = new CamoflageGrpc(config);
+camoflageGrpc.start();
 ```
 
 ## Available methods
 
 ###### _loadConfigFromJson = (configFilePath: string): void_
 
-While you can include your config as part of your code and ensure the types yourself, you may at times want to maintain the configuration for your camouflage server separate from the application code. This is usually a good practice from maintainability point of view, or even practical if you want to maintain multiple config files for different usecases.
+While you can include your config as part of your code and ensure the types yourself, you may at times want to maintain the configuration for your Camoflage server separate from the application code. This is usually a good practice from maintainability point of view, or even practical if you want to maintain multiple config files for different usecases.
 
-loadConfigFromJson lets you load a config via a .json file. You don't need to worry about validating your config file, Camouflage takes care of validating your config and prints relevant errors which help you fix your config files, if you miss something.
+loadConfigFromJson lets you load a config via a .json file. You don't need to worry about validating your config file, Camoflage takes care of validating your config and prints relevant errors which help you fix your config files, if you miss something.
 
-###### _getHandlers = (): CamouflageGrpcHandler | undefined_
+###### _getHandlers = (): CamoflageGrpcHandler | undefined_
 
-Camouflage provides some ready to use handlers which you can use to load your services/methods into the camouflage grpc servers. Depending on the type of method your mocks require, you can use one of the following:
+Camoflage provides some ready to use handlers which you can use to load your services/methods into the Camoflage grpc servers. Depending on the type of method your mocks require, you can use one of the following:
 
 - unaryHandler
 - serverSideStreamingHandler
@@ -53,33 +53,33 @@ Camouflage provides some ready to use handlers which you can use to load your se
 
 ###### _getHelpers = (): Helpers_
 
-When you create a CamouflageGrpc object, it automatically creates an instance of helpers. You can use getHelpers() to get a reference to this helpers object. This is useful when you want add custom helpers that are specific to your requirements.
+When you create a CamoflageGrpc object, it automatically creates an instance of helpers. You can use getHelpers() to get a reference to this helpers object. This is useful when you want add custom helpers that are specific to your requirements.
 
 ```javascript
-import Helpers from "@camouflage/helpers";
+import Helpers from "@camoflage/helpers";
 
-const helpers: Helpers = camouflageGrpc.getHelpers();
+const helpers: Helpers = camoflageGrpc.getHelpers();
 
 helpers.addHelper("ping", (context: any) => {
   return "pong";
 });
 
-camouflageGrpc.start();
+camoflageGrpc.start();
 ```
 
 You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the [helper source code](UPDATE THIS)
 
 ###### _addService = (service: grpc.ServiceDefinition<grpc.UntypedServiceImplementation>, implementation: grpc.UntypedServiceImplementation): void_
 
-`camouflageGrpc.addService` is wrapper on `@grpc/grpc-js` `addService` method. It allows you to load your proto package definitions/services/methods into camouflage's grpc server. In the following example we load the `blog.proto` definition into a grpcObject and use it to provide implementation of the `createBlog` and `listBlogs` methods required by the proto definition
+`camoflageGrpc.addService` is wrapper on `@grpc/grpc-js` `addService` method. It allows you to load your proto package definitions/services/methods into Camoflage's grpc server. In the following example we load the `blog.proto` definition into a grpcObject and use it to provide implementation of the `createBlog` and `listBlogs` methods required by the proto definition
 
 ```javascript
-import CamouflageGrpc, { CamouflageGrpcHandler } from "@camouflage/grpc";
+import CamoflageGrpc, { CamoflageGrpcHandler } from "@camoflage/grpc";
 import * as protoloader from "@grpc/proto-loader";
 import * as grpc from "@grpc/grpc-js";
-const camouflageGrpc: CamouflageGrpc = new CamouflageGrpc();
-camouflageGrpc.loadConfigFromJson("./config_grpc.json");
-const handlers: CamouflageGrpcHandler | undefined = camouflageGrpc.getHandlers();
+const camoflageGrpc: CamoflageGrpc = new CamoflageGrpc();
+camoflageGrpc.loadConfigFromJson("./config_grpc.json");
+const handlers: CamoflageGrpcHandler | undefined = camoflageGrpc.getHandlers();
 
 const blogPackageDef: protoloader.PackageDefinition = protoloader.loadSync("./blog.proto", {});
 const blogGrpcObject: grpc.GrpcObject = grpc.loadPackageDefinition(blogPackageDef);
@@ -87,30 +87,30 @@ const blogPackage = blogGrpcObject.blogPackage;
 
 if (handlers) {
   // @ts-ignore
-  camouflageGrpc.addService(blogPackage.BlogService.service, {
+  camoflageGrpc.addService(blogPackage.BlogService.service, {
     createBlog: handlers.unaryHandler,
     listBlogs: handlers.unaryHandler,
   });
 }
 
-camouflageGrpc.start();
+camoflageGrpc.start();
 ```
 
-Here we are using camouflage's `unaryHandler` as the implementation of the required methods, but you might as well write your own implementation, making it easier to mock only the required methods instead of everything.
+Here we are using Camoflage's `unaryHandler` as the implementation of the required methods, but you might as well write your own implementation, making it easier to mock only the required methods instead of everything.
 
 ###### _start = async (): Promise<void>_
 
-Self explanatory. Starts the camouflage grpc server.
+Self explanatory. Starts the Camoflage grpc server.
 
 ###### _stop = async (): Promise<void>_
 
-Self explanatory. Stops the camouflage grpc server.
+Self explanatory. Stops the Camoflage grpc server.
 
 ## Hooks
 
-## Camouflage GRPC Configuration
+## Camoflage GRPC Configuration
 
-You can provide following configuration options in your `config.json` file and load it to camouflage before you start the server
+You can provide following configuration options in your `config.json` file and load it to Camoflage before you start the server
 
 ```json
 {
@@ -162,7 +162,7 @@ The expected mock file path for each required methods would be:
 - ./grpcMocks/foo/todoPackage/createTodoStream.mock
 - ./grpcMocks/foo/todoPackage/createTodoBidiStream.mock
 
-## Camouflage GRPC Helpers
+## Camoflage GRPC Helpers
 
 ### `capture` Helper
 
@@ -274,9 +274,9 @@ Client streaming and unary responses are identical.
 
 #### Bidi Streaming Response
 
-Bidi streaming supported currently by camouflage is like ping-pong in nature. For each request you stream to the server, you get one response back.
+Bidi streaming supported currently by Camoflage is like ping-pong in nature. For each request you stream to the server, you get one response back.
 
-Bidi streaming responses differ from the other responses. Your mockfile would include a required object `data`. This is what camouflage will respond back for each of your requests. You can include an optional `end` object, which would be sent when you end the client side stream. This is an optional object, in absence of which, camouflage will simply end the server side stream without any response.
+Bidi streaming responses differ from the other responses. Your mockfile would include a required object `data`. This is what Camoflage will respond back for each of your requests. You can include an optional `end` object, which would be sent when you end the client side stream. This is an optional object, in absence of which, Camoflage will simply end the server side stream without any response.
 
 ```json
 {
@@ -293,9 +293,9 @@ Bidi streaming responses differ from the other responses. Your mockfile would in
 
 ## Request matching
 
-Request matching in camouflage grpc module can be done with a combination of helpers like `if`, `unless` and `is` along with `capture` helper.
+Request matching in Camoflage grpc module can be done with a combination of helpers like `if`, `unless` and `is` along with `capture` helper.
 
-GRPC `capture` helper has access to `request` and `metadata` objects from your requests. Usage can be found in the helper section [above](#camouflage-grpc-helpers)
+GRPC `capture` helper has access to `request` and `metadata` objects from your requests. Usage can be found in the helper section [above](#camoflage-grpc-helpers)
 
 !!! note
 
