@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Getting Started - Camouflage Service Virtualization</title>
+    <title>Getting Started - Camoflage Service Virtualization</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href=".." class="icon icon-home"> Camouflage Service Virtualization
+          <a href=".." class="icon icon-home"> Camoflage Service Virtualization
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,7 +40,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">Camouflage Service Virtualization</a>
+                <li class="toctree-l1"><a class="reference internal" href="..">Camoflage Service Virtualization</a>
                 </li>
               </ul>
               <ul class="current">
@@ -48,17 +48,17 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#camouflagehelpers">@camouflage/helpers</a>
+    <li class="toctree-l3"><a class="reference internal" href="#camoflagehelpers">@camoflage/helpers</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#camouflagehttp">@camouflage/http</a>
+    <li class="toctree-l3"><a class="reference internal" href="#camoflagehttp">@camoflage/http</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#camouflagegprc">@camouflage/gprc</a>
+    <li class="toctree-l3"><a class="reference internal" href="#camoflagegprc">@camoflage/gprc</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#camouflagewebsockets">@camouflage/websockets</a>
+    <li class="toctree-l3"><a class="reference internal" href="#camoflagewebsockets">@camoflage/websockets</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#camouflagethrift">@camouflage/thrift</a>
+    <li class="toctree-l3"><a class="reference internal" href="#camoflagethrift">@camoflage/thrift</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#camouflagesoap">@camouflage/soap</a>
+    <li class="toctree-l3"><a class="reference internal" href="#camoflagesoap">@camoflage/soap</a>
     </li>
         </ul>
     </li>
@@ -84,7 +84,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="..">Camouflage Service Virtualization</a>
+          <a href="..">Camoflage Service Virtualization</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -101,38 +101,38 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="getting-started">Getting Started</h1>
-<p>Create a new project, and install the camouflage modules you need. Available modules are:</p>
+<p>Create a new project, and install the Camoflage modules you need. Available modules are:</p>
 <ol>
-<li>@camouflage/helpers</li>
-<li>@camouflage/http</li>
-<li>@camouflage/grpc</li>
-<li>@camouflage/websockets - WIP</li>
-<li>@camouflage/thrift - WIP</li>
-<li>@camouflage/soap - WIP</li>
+<li>@camoflage/helpers</li>
+<li>@camoflage/http</li>
+<li>@camoflage/grpc</li>
+<li>@camoflage/websockets - WIP</li>
+<li>@camoflage/thrift - WIP</li>
+<li>@camoflage/soap - WIP</li>
 </ol>
 <h2 id="quick-start">Quick Start</h2>
-<h3 id="camouflagehelpers">@camouflage/helpers</h3>
-<p>Camouflage helpers form the backbone of each protocol. You can build your mocks without them, but helpers add advanced features to your mocks. You can chose the protocol specific package that you need to download from the following list, however helpers are required for every camouflage project.</p>
+<h3 id="camoflagehelpers">@camoflage/helpers</h3>
+<p>Camoflage helpers form the backbone of each protocol. You can build your mocks without them, but helpers add advanced features to your mocks. You can chose the protocol specific package that you need to download from the following list, however helpers are required for every Camoflage project.</p>
 <p>Install helpers</p>
-<pre><code class="language-bash">npm i @camouflage/helpers
+<pre><code class="language-bash">npm i @camoflage/helpers
 </code></pre>
 <p>When you create a helper object, it loads some inbuilt helpers that are listed <a href="../helpers/">here</a>. Once you have the object, you only need to parse your template string.</p>
-<pre><code class="language-javascript">import Helpers from &quot;@camouflage/helpers&quot;;
+<pre><code class="language-javascript">import Helpers from &quot;@camoflage/helpers&quot;;
 
 const helpers: Helpers = new Helpers();
 const todaysDate: string = helpers.parse(&quot;{{now format='yyyy-MM-dd'}}&quot;);
 console.log(todaysDate); // 2023-12-21
 </code></pre>
 <p>Helpers class takes in two arguments i.e. <code>injectionAllowed</code> and <code>loglevel</code>.</p>
-<h3 id="camouflagehttp">@camouflage/http</h3>
-<p>Camouflage HTTP Module helps you create mocks for your http/https/http2 endpoints. To start install <code>@camouflage/helpers</code> and <code>@camouflage/http</code> in your project.</p>
-<pre><code class="language-bash">npm i @camouflage/helpers  @camouflage/http
+<h3 id="camoflagehttp">@camoflage/http</h3>
+<p>Camoflage HTTP Module helps you create mocks for your http/https/http2 endpoints. To start install <code>@camoflage/helpers</code> and <code>@camoflage/http</code> in your project.</p>
+<pre><code class="language-bash">npm i @camoflage/helpers  @camoflage/http
 </code></pre>
 <p>Once you have the required packages installed, you can start your http server as shown below.</p>
-<pre><code class="language-javascript">import CamouflageHttp from &quot;@camouflage/http&quot;;
+<pre><code class="language-javascript">import CamoflageHttp from &quot;@camoflage/http&quot;;
 
-const camouflageHttp: CamouflageHttp = new CamouflageHttp();
-camouflageHttp.loadConfigFromJson(&quot;./config.json&quot;);
+const CamoflageHttp: CamoflageHttp = new CamoflageHttp();
+CamoflageHttp.loadConfigFromJson(&quot;./config.json&quot;);
 /**
  * You can follow the instructions in the link below
  * to generate self signed certificates if you don't already have them.
@@ -143,27 +143,27 @@ camouflageHttp.loadConfigFromJson(&quot;./config.json&quot;);
  *    cert: fs.readFileSync(&quot;location/to/server.crt&quot;),
  *    // more options
  * };
- * camouflageHttp.setServerOptionsHttps(httpsServerOptions);
+ * CamoflageHttp.setServerOptionsHttps(httpsServerOptions);
  * */
 
-camouflageHttp.start();
+CamoflageHttp.start();
 </code></pre>
-<p>Read more about camouflage http module <a href="../http/">here</a></p>
-<h3 id="camouflagegprc">@camouflage/gprc</h3>
-<p>Camouflage GRPC Module helps you create mocks for your grpc endpoints. To start, install <code>@camouflage/helpers</code> and <code>@camouflage/grpc</code> in your project.</p>
-<pre><code class="language-bash">npm i @camouflage/helpers @camouflage/grpc
+<p>Read more about Camoflage http module <a href="../http/">here</a></p>
+<h3 id="camoflagegprc">@camoflage/gprc</h3>
+<p>Camoflage GRPC Module helps you create mocks for your grpc endpoints. To start, install <code>@camoflage/helpers</code> and <code>@camoflage/grpc</code> in your project.</p>
+<pre><code class="language-bash">npm i @camoflage/helpers @camoflage/grpc
 </code></pre>
 <p>Once you have the required packages installed, you can start your grpc server as shown below.</p>
-<pre><code class="language-javascript">import CamouflageGrpc, { CamouflageGrpcHandler } from &quot;@camouflage/grpc&quot;;
+<pre><code class="language-javascript">import CamoflageGrpc, { CamoflageGrpcHandler } from &quot;@camoflage/grpc&quot;;
 import * as protoloader from &quot;@grpc/proto-loader&quot;;
 import * as grpc from &quot;@grpc/grpc-js&quot;;
 
-// Create camouflageGrpc object and load config.
-const camouflageGrpc: CamouflageGrpc = new CamouflageGrpc();
-camouflageGrpc.loadConfigFromJson(&quot;./config_grpc.json&quot;);
+// Create CamoflageGrpc object and load config.
+const camoflageGrpc: CamoflageGrpc = new CamoflageGrpc();
+camoflageGrpc.loadConfigFromJson(&quot;./config_grpc.json&quot;);
 
-// Get an instance of available camouflage grpc handlers
-const handlers: CamouflageGrpcHandler | undefined = camouflageGrpc.getHandlers();
+// Get an instance of available camoflage grpc handlers
+const handlers: CamoflageGrpcHandler | undefined = camoflageGrpc.getHandlers();
 
 // Load your proto file
 const blogPackageDef: protoloader.PackageDefinition = protoloader.loadSync(&quot;./blog.proto&quot;, {});
@@ -179,28 +179,28 @@ if (handlers) {
    * - clientSideStreamingHandler
    * - bidiStreamingHandler
    *
-   * Add your service to camouflage server.
+   * Add your service to Camoflage server.
    * */
-  camouflageGrpc.addService(blogPackage.BlogService.service, {
+  camoflageGrpc.addService(blogPackage.BlogService.service, {
     createBlog: handlers.unaryHandler,
     listBlogs: handlers.unaryHandler,
   });
 }
 
-camouflageGrpc.start();
+camoflageGrpc.start();
 </code></pre>
-<p>Read more about camouflage grpc module <a href="../grpc/">here</a></p>
-<h3 id="camouflagewebsockets">@camouflage/websockets</h3>
+<p>Read more about Camoflage grpc module <a href="../grpc/">here</a></p>
+<h3 id="camoflagewebsockets">@camoflage/websockets</h3>
 <p>WIP</p>
-<h3 id="camouflagethrift">@camouflage/thrift</h3>
+<h3 id="camoflagethrift">@camoflage/thrift</h3>
 <p>WIP</p>
-<h3 id="camouflagesoap">@camouflage/soap</h3>
+<h3 id="camoflagesoap">@camoflage/soap</h3>
 <p>WIP</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Camouflage Service Virtualization"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral float-left" title="Camoflage Service Virtualization"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../helpers/" class="btn btn-neutral float-right" title="Helpers">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 

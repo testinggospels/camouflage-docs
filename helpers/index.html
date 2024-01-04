@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Helpers - Camouflage Service Virtualization</title>
+    <title>Helpers - Camoflage Service Virtualization</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href=".." class="icon icon-home"> Camouflage Service Virtualization
+          <a href=".." class="icon icon-home"> Camoflage Service Virtualization
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,7 +40,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">Camouflage Service Virtualization</a>
+                <li class="toctree-l1"><a class="reference internal" href="..">Camoflage Service Virtualization</a>
                 </li>
               </ul>
               <ul>
@@ -88,7 +88,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="..">Camouflage Service Virtualization</a>
+          <a href="..">Camoflage Service Virtualization</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -105,8 +105,8 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="helpers">Helpers</h1>
-<p>Camouflage uses handlebars to help you generate dynamic responses if needed. Read more about handlebars <a href="https://handlebarsjs.com/guide/">here</a>.</p>
-<p>You can use all the helpers provided by handlebars itself, for example, <code>if</code>, <code>unless</code>, <code>each</code>, and <code>with</code>. Camouflage also provides some additional helpers to make some repetitive tasks easy.</p>
+<p>Camoflage uses handlebars to help you generate dynamic responses if needed. Read more about handlebars <a href="https://handlebarsjs.com/guide/">here</a>.</p>
+<p>You can use all the helpers provided by handlebars itself, for example, <code>if</code>, <code>unless</code>, <code>each</code>, and <code>with</code>. Camoflage also provides some additional helpers to make some repetitive tasks easy.</p>
 <h3 id="array-helper"><code>array</code> Helper</h3>
 <p>Usage:</p>
 <p><strong>{{array source='Apple,Banana,Mango,Kiwi' delimiter=','}}</strong>: Generate an array from a source using given delimiter.</p>
@@ -129,7 +129,7 @@
 <p>Usage: Concatenates multiple strings together, (static or dynamic), to form a single string.</p>
 <p>Example:</p>
 <ul>
-<li><code>{{concat 'Camouflage ' 'is ' 'easy!!'}}</code> results in <code>Camouflage is easy</code>.</li>
+<li><code>{{concat 'Camoflage ' 'is ' 'easy!!'}}</code> results in <code>Camoflage is easy</code>.</li>
 <li>You can also pass in a delimiter, i.e. <code>{{concat '1' '22' '333' delimiter='-'}}</code> will result in <code>1-22-333</code></li>
 </ul>
 <h3 id="csv-helper"><code>csv</code> helper</h3>
@@ -146,7 +146,7 @@
 <h3 id="import-helper"><code>import</code> Helper</h3>
 <p>Usage: Import helpers lets you store your reusable templates in shared files, which can then be imported into other files.</p>
 <p>Example:</p>
-<p>You can create a camouflage mock file which would contain the response for the request <code>GET /hello/world</code></p>
+<p>You can create a Camoflage mock file which would contain the response for the request <code>GET /hello/world</code></p>
 <pre><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -154,13 +154,13 @@ Content-Type: application/json
     &quot;now&quot;: &quot;{{import path=&quot;/User/john.doe/uselessButReusableNow.mock&quot;}}&quot;
 }
 </code></pre>
-<p>Here you are importing the file <code>uselessButResuableNow.mock</code>, camouflage helper will replace the import with the contents of your imported file. You can create the reusable file as</p>
+<p>Here you are importing the file <code>uselessButResuableNow.mock</code>, Camoflage helper will replace the import with the contents of your imported file. You can create the reusable file as</p>
 <pre><code>{{now format='yyyy-MM-dd'}}
 </code></pre>
 <p>This seems trivial and of no use but think bigger. Your mock file contains not just one but several responses and you select one of them based on a certain condition. You can break down your mocks into several files and import them as needed, making it easier to maintain.</p>
 <h3 id="inject-helper"><code>inject</code> Helper</h3>
 <p><strong>Time for the forbidden fruit! The security vulnerability. Everything you have been taught not to do.</strong></p>
-<p>Inject helper allows you replace the hard coded values in your mock files with a javascript code, when you still want to use Camouflage's response builder but you want control over one or two fields.</p>
+<p>Inject helper allows you replace the hard coded values in your mock files with a javascript code, when you still want to use Camoflage's response builder but you want control over one or two fields.</p>
 <p>Example:</p>
 <pre><code class="language-json">{
     &quot;phone&quot;: {{#inject}}(()=&gt;{ return Math.floor(1000000000 + Math.random() * 9000000000); })();{{/inject}}
