@@ -179,7 +179,7 @@ helpers.addHelper(&quot;ping&quot;, (context: any) =&gt; {
 
 camoflageGrpc.start();
 </code></pre>
-<p>You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the <a href="UPDATE THIS">helper source code</a></p>
+<p>You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the <a href="https://github.com/testinggospels/camouflage-helpers">helper source code</a></p>
 <h6 id="addservice-service-grpcservicedefinition-implementation-grpcuntypedserviceimplementation-void"><em>addService = (service: grpc.ServiceDefinition<grpc.UntypedServiceImplementation>, implementation: grpc.UntypedServiceImplementation): void</em></h6>
 <p><code>camoflageGrpc.addService</code> is wrapper on <code>@grpc/grpc-js</code> <code>addService</code> method. It allows you to load your proto package definitions/services/methods into Camoflage's grpc server. In the following example we load the <code>blog.proto</code> definition into a grpcObject and use it to provide implementation of the <code>createBlog</code> and <code>listBlogs</code> methods required by the proto definition</p>
 <pre><code class="language-javascript">import CamoflageGrpc, { CamoflageGrpcHandler } from &quot;@camoflage/grpc&quot;;
