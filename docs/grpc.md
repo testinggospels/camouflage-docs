@@ -108,6 +108,10 @@ Self explanatory. Stops the Camoflage grpc server.
 
 ## Hooks
 
+!!! note
+
+    COMING SOON
+
 ## Camoflage GRPC Configuration
 
 You can provide following configuration options in your `config.json` file and load it to Camoflage before you start the server

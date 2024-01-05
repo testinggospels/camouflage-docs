@@ -13,15 +13,15 @@ npm i @camoflage/helpers @camoflage/http
 ```javascript
 import CamoflageHttp from "@camoflage/http";
 
-const CamoflageHttp: CamoflageHttp = new CamoflageHttp();
+const camoflageHttp: CamoflageHttp = new CamoflageHttp();
 
-CamoflageHttp.loadConfigFromJson("./config.json");
-CamoflageHttp.setServerOptions(options);
-CamoflageHttp.setSecureServerOptions(options);
-CamoflageHttp.setupCacheWithOptions(options);
-CamoflageHttp.setupCorsWithOptions(options);
+camoflageHttp.loadConfigFromJson("./config.json");
+camoflageHttp.setServerOptions(options);
+camoflageHttp.setSecureServerOptions(options);
+camoflageHttp.setupCacheWithOptions(options);
+camoflageHttp.setupCorsWithOptions(options);
 
-CamoflageHttp.start();
+camoflageHttp.start();
 ```
 
 - Or you can create the Camoflage object with the options
@@ -39,8 +39,8 @@ const httpsOptions: https.ServerOptions = {};
 const cacheOptions: apicache.Options = {};
 const corsOptions: cors.Options = {};
 
-const CamoflageHttp: CamoflageHttp = new CamoflageHttp(config, httpOptions, httpsOptions, cacheOptions, corsOptions);
-CamoflageHttp.start();
+const camoflageHttp: CamoflageHttp = new CamoflageHttp(config, httpOptions, httpsOptions, cacheOptions, corsOptions);
+camoflageHttp.start();
 ```
 
 ## Available methods
@@ -52,13 +52,13 @@ When you create a CamoflageHttp object, it automatically creates an instance of 
 ```javascript
 import Helpers from "@camoflage/helpers";
 
-const helpers: Helpers = CamoflageHttp.getHelpers();
+const helpers: Helpers = camoflageHttp.getHelpers();
 
 helpers.addHelper("ping", (context: any) => {
   return "pong";
 });
 
-CamoflageHttp.start();
+camoflageHttp.start();
 ```
 
 You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the [helper source code](UPDATE THIS).
@@ -105,8 +105,8 @@ let cacheOptions: apicache.Options = {
   // more options
 };
 
-CamoflageHttp.setupCacheWithOptions(cacheOptions);
-CamoflageHttp.start();
+camoflageHttp.setupCacheWithOptions(cacheOptions);
+camoflageHttp.start();
 ```
 
 You can refer to [apicache documentation](https://www.npmjs.com/package/apicache#available-options-first-value-is-default) for more details on the available options and how to configure them.
@@ -122,8 +122,8 @@ const corsOptions: cors.Options = {
   origin: ["http://localhost:3000", "http://instrukti.com/"],
   methods: "GET,POST",
 };
-CamoflageHttp.setupCorsWithOptions(corsOptions);
-CamoflageHttp.start();
+camoflageHttp.setupCorsWithOptions(corsOptions);
+camoflageHttp.start();
 ```
 
 Read more about available options on [cors documentation](https://www.npmjs.com/package/cors#configuration-options).
@@ -167,7 +167,7 @@ Self explanatory. Restarts the Camoflage http server.
 In the following example, we'll see how can we use `onRequest` hook to intercept the incoming request:
 
 ```javascript
-CamoflageHttp.addHook("/user/:userId/wallet/:walletId", "onRequest", (req, res) => {
+camoflageHttp.addHook("/user/:userId/wallet/:walletId", "onRequest", (req, res) => {
   console.log("Hello from hook", req.route.path); // You can do some logging
   res.set("Sent-From", "onRequestHook"); // You can set some headers
   // You can check some conditions
@@ -201,11 +201,11 @@ Finally, you can use `afterResponse` hooks to measure time or log some messages 
 ```javascript
 let time = 0;
 let startTime = 0;
-CamoflageHttp.addHook("/user/:userId/wallet/:walletId", "onRequest", (req, res) => {
+camoflageHttp.addHook("/user/:userId/wallet/:walletId", "onRequest", (req, res) => {
   startTime = Date.now();
   console.log("Hello from hook", req.route.path);
 });
-CamoflageHttp.addHook("/user/:userId/wallet/:walletId", "afterResponse", (req, res) => {
+camoflageHttp.addHook("/user/:userId/wallet/:walletId", "afterResponse", (req, res) => {
   time = Date.now() - startTime;
   console.log(time);
   time = 0;
@@ -650,7 +650,7 @@ Enable it via config
 And then configure rest of the options as you wish
 
 ```javascript
-CamoflageHttp.setupValidationWithOptions({
+camoflageHttp.setupValidationWithOptions({
   apiSpec: "./openapi.yaml",
   validateRequests: true,
   validateResponses: true,
@@ -683,5 +683,5 @@ function shouldCompress(req, res) {
   // fallback to standard filter function
   return compression.filter(req, res);
 }
-CamoflageHttp.setupCompressionWithOptions({ filter: shouldCompress });
+camoflageHttp.setupCompressionWithOptions({ filter: shouldCompress });
 ```
