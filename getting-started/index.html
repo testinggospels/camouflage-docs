@@ -131,8 +131,8 @@ console.log(todaysDate); // 2023-12-21
 <p>Once you have the required packages installed, you can start your http server as shown below.</p>
 <pre><code class="language-javascript">import CamoflageHttp from &quot;@camoflage/http&quot;;
 
-const CamoflageHttp: CamoflageHttp = new CamoflageHttp();
-CamoflageHttp.loadConfigFromJson(&quot;./config.json&quot;);
+const camoflageHttp: CamoflageHttp = new CamoflageHttp();
+camoflageHttp.loadConfigFromJson(&quot;./config.json&quot;);
 /**
  * You can follow the instructions in the link below
  * to generate self signed certificates if you don't already have them.
@@ -143,10 +143,10 @@ CamoflageHttp.loadConfigFromJson(&quot;./config.json&quot;);
  *    cert: fs.readFileSync(&quot;location/to/server.crt&quot;),
  *    // more options
  * };
- * CamoflageHttp.setServerOptionsHttps(httpsServerOptions);
+ * camoflageHttp.setServerOptionsHttps(httpsServerOptions);
  * */
 
-CamoflageHttp.start();
+camoflageHttp.start();
 </code></pre>
 <p>Read more about Camoflage http module <a href="../http/">here</a></p>
 <h3 id="camoflagegprc">@camoflage/gprc</h3>

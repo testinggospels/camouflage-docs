@@ -180,15 +180,15 @@
 </ul>
 <pre><code class="language-javascript">import CamoflageHttp from &quot;@camoflage/http&quot;;
 
-const CamoflageHttp: CamoflageHttp = new CamoflageHttp();
+const camoflageHttp: CamoflageHttp = new CamoflageHttp();
 
-CamoflageHttp.loadConfigFromJson(&quot;./config.json&quot;);
-CamoflageHttp.setServerOptions(options);
-CamoflageHttp.setSecureServerOptions(options);
-CamoflageHttp.setupCacheWithOptions(options);
-CamoflageHttp.setupCorsWithOptions(options);
+camoflageHttp.loadConfigFromJson(&quot;./config.json&quot;);
+camoflageHttp.setServerOptions(options);
+camoflageHttp.setSecureServerOptions(options);
+camoflageHttp.setupCacheWithOptions(options);
+camoflageHttp.setupCorsWithOptions(options);
 
-CamoflageHttp.start();
+camoflageHttp.start();
 </code></pre>
 <ul>
 <li>Or you can create the Camoflage object with the options</li>
@@ -205,21 +205,21 @@ const httpsOptions: https.ServerOptions = {};
 const cacheOptions: apicache.Options = {};
 const corsOptions: cors.Options = {};
 
-const CamoflageHttp: CamoflageHttp = new CamoflageHttp(config, httpOptions, httpsOptions, cacheOptions, corsOptions);
-CamoflageHttp.start();
+const camoflageHttp: CamoflageHttp = new CamoflageHttp(config, httpOptions, httpsOptions, cacheOptions, corsOptions);
+camoflageHttp.start();
 </code></pre>
 <h2 id="available-methods">Available methods</h2>
 <h6 id="gethelpers-helpers"><em>getHelpers = (): Helpers</em></h6>
 <p>When you create a CamoflageHttp object, it automatically creates an instance of helpers. You can use <code>getHelpers()</code> to get a reference to this helpers object. This is useful when you want add custom helpers that are specific to your requirements.</p>
 <pre><code class="language-javascript">import Helpers from &quot;@camoflage/helpers&quot;;
 
-const helpers: Helpers = CamoflageHttp.getHelpers();
+const helpers: Helpers = camoflageHttp.getHelpers();
 
 helpers.addHelper(&quot;ping&quot;, (context: any) =&gt; {
   return &quot;pong&quot;;
 });
 
-CamoflageHttp.start();
+camoflageHttp.start();
 </code></pre>
 <p>You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the <a href="UPDATE THIS">helper source code</a>.</p>
 <h6 id="loadconfigfromjsonconfigfilepath-string-void"><em>loadConfigFromJson(configFilePath: string): void</em></h6>
@@ -249,8 +249,8 @@ let cacheOptions: apicache.Options = {
   // more options
 };
 
-CamoflageHttp.setupCacheWithOptions(cacheOptions);
-CamoflageHttp.start();
+camoflageHttp.setupCacheWithOptions(cacheOptions);
+camoflageHttp.start();
 </code></pre>
 <p>You can refer to <a href="https://www.npmjs.com/package/apicache#available-options-first-value-is-default">apicache documentation</a> for more details on the available options and how to configure them.</p>
 <h6 id="setupcorswithoptionscorsoptions-corscorsoptions-void"><em>setupCorsWithOptions(corsOptions: cors.CorsOptions): void</em></h6>
@@ -261,8 +261,8 @@ const corsOptions: cors.Options = {
   origin: [&quot;http://localhost:3000&quot;, &quot;http://instrukti.com/&quot;],
   methods: &quot;GET,POST&quot;,
 };
-CamoflageHttp.setupCorsWithOptions(corsOptions);
-CamoflageHttp.start();
+camoflageHttp.setupCorsWithOptions(corsOptions);
+camoflageHttp.start();
 </code></pre>
 <p>Read more about available options on <a href="https://www.npmjs.com/package/cors#configuration-options">cors documentation</a>.</p>
 <h6 id="setupvalidationwithoptions-validationopts-openapivalidatoropts-void"><em>setupValidationWithOptions = (validationOpts: OpenApiValidatorOpts): void</em></h6>
@@ -287,7 +287,7 @@ CamoflageHttp.start();
 <h2 id="hooks">Hooks</h2>
 <h4 id="onrequest"><code>onRequest</code></h4>
 <p>In the following example, we'll see how can we use <code>onRequest</code> hook to intercept the incoming request:</p>
-<pre><code class="language-javascript">CamoflageHttp.addHook(&quot;/user/:userId/wallet/:walletId&quot;, &quot;onRequest&quot;, (req, res) =&gt; {
+<pre><code class="language-javascript">camoflageHttp.addHook(&quot;/user/:userId/wallet/:walletId&quot;, &quot;onRequest&quot;, (req, res) =&gt; {
   console.log(&quot;Hello from hook&quot;, req.route.path); // You can do some logging
   res.set(&quot;Sent-From&quot;, &quot;onRequestHook&quot;); // You can set some headers
   // You can check some conditions
@@ -313,11 +313,11 @@ CamoflageHttp.start();
 <p>Finally, you can use <code>afterResponse</code> hooks to measure time or log some messages as shown below</p>
 <pre><code class="language-javascript">let time = 0;
 let startTime = 0;
-CamoflageHttp.addHook(&quot;/user/:userId/wallet/:walletId&quot;, &quot;onRequest&quot;, (req, res) =&gt; {
+camoflageHttp.addHook(&quot;/user/:userId/wallet/:walletId&quot;, &quot;onRequest&quot;, (req, res) =&gt; {
   startTime = Date.now();
   console.log(&quot;Hello from hook&quot;, req.route.path);
 });
-CamoflageHttp.addHook(&quot;/user/:userId/wallet/:walletId&quot;, &quot;afterResponse&quot;, (req, res) =&gt; {
+camoflageHttp.addHook(&quot;/user/:userId/wallet/:walletId&quot;, &quot;afterResponse&quot;, (req, res) =&gt; {
   time = Date.now() - startTime;
   console.log(time);
   time = 0;
@@ -678,7 +678,7 @@ Response-Delay: 2000
 }
 </code></pre>
 <p>And then configure rest of the options as you wish</p>
-<pre><code class="language-javascript">CamoflageHttp.setupValidationWithOptions({
+<pre><code class="language-javascript">camoflageHttp.setupValidationWithOptions({
   apiSpec: &quot;./openapi.yaml&quot;,
   validateRequests: true,
   validateResponses: true,
@@ -703,7 +703,7 @@ Response-Delay: 2000
   // fallback to standard filter function
   return compression.filter(req, res);
 }
-CamoflageHttp.setupCompressionWithOptions({ filter: shouldCompress });
+camoflageHttp.setupCompressionWithOptions({ filter: shouldCompress });
 </code></pre>
               
             </div>
