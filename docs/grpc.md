@@ -67,7 +67,7 @@ helpers.addHelper("ping", (context: any) => {
 camoflageGrpc.start();
 ```
 
-You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the [helper source code](UPDATE THIS)
+You can take a look at how inbuilt helpers have been created, in case you want to understand how custom helpers can be created. Refer to the [helper source code](https://github.com/testinggospels/camouflage-helpers)
 
 ###### _addService = (service: grpc.ServiceDefinition<grpc.UntypedServiceImplementation>, implementation: grpc.UntypedServiceImplementation): void_
 
