@@ -1,8 +1,8 @@
 # Helpers
 
-Camoflage uses handlebars to help you generate dynamic responses if needed. Read more about handlebars [here](https://handlebarsjs.com/guide/).
+Camouflage uses handlebars to help you generate dynamic responses if needed. Read more about handlebars [here](https://handlebarsjs.com/guide/).
 
-You can use all the helpers provided by handlebars itself, for example, `if`, `unless`, `each`, and `with`. Camoflage also provides some additional helpers to make some repetitive tasks easy.
+You can use all the helpers provided by handlebars itself, for example, `if`, `unless`, `each`, and `with`. Camouflage also provides some additional helpers to make some repetitive tasks easy.
 
 ### `array` Helper
 
@@ -37,7 +37,7 @@ Usage: Concatenates multiple strings together, (static or dynamic), to form a si
 
 Example:
 
-- `{{concat 'Camoflage ' 'is ' 'easy!!'}}` results in `Camoflage is easy`.
+- `{{concat 'Camouflage ' 'is ' 'easy!!'}}` results in `Camouflage is easy`.
 - You can also pass in a delimiter, i.e. `{{concat '1' '22' '333' delimiter='-'}}` will result in `1-22-333`
 
 ### `csv` helper
@@ -58,7 +58,7 @@ Usage: Import helpers lets you store your reusable templates in shared files, wh
 
 Example:
 
-You can create a Camoflage mock file which would contain the response for the request `GET /hello/world`
+You can create a Camouflage mock file which would contain the response for the request `GET /hello/world`
 
 ```
 HTTP/1.1 200 OK
@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 ```
 
-Here you are importing the file `uselessButResuableNow.mock`, Camoflage helper will replace the import with the contents of your imported file. You can create the reusable file as
+Here you are importing the file `uselessButResuableNow.mock`, Camouflage helper will replace the import with the contents of your imported file. You can create the reusable file as
 
 ```
 {{now format='yyyy-MM-dd'}}
@@ -81,7 +81,7 @@ This seems trivial and of no use but think bigger. Your mock file contains not j
 
 **Time for the forbidden fruit! The security vulnerability. Everything you have been taught not to do.**
 
-Inject helper allows you replace the hard coded values in your mock files with a javascript code, when you still want to use Camoflage's response builder but you want control over one or two fields.
+Inject helper allows you replace the hard coded values in your mock files with a javascript code, when you still want to use Camouflage's response builder but you want control over one or two fields.
 
 Example:
 
