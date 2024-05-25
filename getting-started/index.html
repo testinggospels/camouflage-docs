@@ -111,8 +111,14 @@
 <li>@camouflage/soap - WIP</li>
 </ol>
 <h2 id="quick-start">Quick Start</h2>
+<ol>
+<li>Create a new project: <code>npm init --y</code></li>
+<li>Set <code>"type": "module"</code> in your <code>package.json</code></li>
+<li>Install the module relevant to your API protocol. For http/https/http2 protocols: <code>npx jsr add @camouflage/http</code>. For grpc protocol: <code>npx jsr add @camouflage/grpc</code></li>
+<li>You are now ready to build your mocks. Learn more about each module below.</li>
+</ol>
 <h3 id="camouflagehelpers">@camouflage/helpers</h3>
-<p>Camouflage helpers form the backbone of each protocol. You can build your mocks without them, but helpers add advanced features to your mocks. You can chose the protocol specific package that you need to download from the following list, however helpers are required for every Camouflage project.</p>
+<p>Camouflage helpers form the backbone of each protocol. You can build your mocks without them, but helpers add advanced features to your mocks.</p>
 <p>Install helpers</p>
 <pre><code class="language-bash">npx jsr add @camouflage/helpers
 </code></pre>
@@ -124,6 +130,10 @@ const todaysDate = helpers.parse(&quot;{{now format='yyyy-MM-dd'}}&quot;);
 console.log(todaysDate); // 2023-12-21
 </code></pre>
 <p>Helpers class takes in two arguments i.e. <code>injectionAllowed</code> and <code>loglevel</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that <code>@camouflage/helpers</code> is not intended for standalone usage. It is bundled with other camouflage modules such as http and grpc. You could use it in non-camouflage projects, however such use cases will not be supported.</p>
+</div>
 <h3 id="camouflagehttp">@camouflage/http</h3>
 <p>Camouflage HTTP Module helps you create mocks for your http/https/http2 endpoints. To start install <code>@camouflage/http</code> in your project.</p>
 <pre><code class="language-bash">npx jsr add @camouflage/http
@@ -154,7 +164,7 @@ camouflageHttp.start();
 <pre><code class="language-bash">npx jsr add @camouflage/grpc
 </code></pre>
 <p>Once you have the required packages installed, you can start your grpc server as shown below.</p>
-<pre><code class="language-javascript">import CamouflageGrpc, { CamouflageGrpcHandler } from &quot;@camouflage/grpc&quot;;
+<pre><code class="language-javascript">import CamouflageGrpc from &quot;@camouflage/grpc&quot;;
 import * as protoloader from &quot;@grpc/proto-loader&quot;;
 import * as grpc from &quot;@grpc/grpc-js&quot;;
 
