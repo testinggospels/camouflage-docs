@@ -101,6 +101,8 @@ This translates to a random 10 digit number. _Is it a phone number? Is it not? W
     const helpers = new Helpers(true) // setting injectionAllowed = true
     ```
 
+    Or, after creation of helper object using setInjectionAllowed method: `helpers.setInjectionAllowed(true)`,
+
 ### `is` Helper
 
 Credits: [danharper/Handlebars-Helpers](https://github.com/danharper/Handlebars-Helpers)

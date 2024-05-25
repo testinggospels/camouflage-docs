@@ -11,9 +11,14 @@ Create a new project, and install the Camouflage modules you need. Available mod
 
 ## Quick Start
 
+1. Create a new project: `npm init --y`
+2. Set `"type": "module"` in your `package.json`
+3. Install the module relevant to your API protocol. For http/https/http2 protocols: `npx jsr add @camouflage/http`. For grpc protocol: `npx jsr add @camouflage/grpc`
+4. You are now ready to build your mocks. Learn more about each module below.
+
 ### @camouflage/helpers
 
-Camouflage helpers form the backbone of each protocol. You can build your mocks without them, but helpers add advanced features to your mocks. You can chose the protocol specific package that you need to download from the following list, however helpers are required for every Camouflage project.
+Camouflage helpers form the backbone of each protocol. You can build your mocks without them, but helpers add advanced features to your mocks.
 
 Install helpers
 
@@ -32,6 +37,10 @@ console.log(todaysDate); // 2023-12-21
 ```
 
 Helpers class takes in two arguments i.e. `injectionAllowed` and `loglevel`.
+
+!!! note
+
+    Note that `@camouflage/helpers` is not intended for standalone usage. It is bundled with other camouflage modules such as http and grpc. You could use it in non-camouflage projects, however such use cases will not be supported.
 
 ### @camouflage/http
 
@@ -77,7 +86,7 @@ npx jsr add @camouflage/grpc
 Once you have the required packages installed, you can start your grpc server as shown below.
 
 ```javascript
-import CamouflageGrpc, { CamouflageGrpcHandler } from "@camouflage/grpc";
+import CamouflageGrpc from "@camouflage/grpc";
 import * as protoloader from "@grpc/proto-loader";
 import * as grpc from "@grpc/grpc-js";
 
