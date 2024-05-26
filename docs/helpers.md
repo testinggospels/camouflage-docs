@@ -10,6 +10,10 @@ Usage:
 
 **{{array source='Apple,Banana,Mango,Kiwi' delimiter=','}}**: Generate an array from a source using given delimiter.
 
+Parameters:
+
+1. Required: `source`, `delimiter`
+
 ### `assign` Helper
 
 Usage: Assign helper can be used to assign a value to a variable, by specifying a name value pair. This can be useful specially when using capture helper using regex and jsonpath selectors. Since running a regex or jsonpath operation is an expensive task, assign helper can be used to capture a value once, store it in a variable and use throughout the mock file. Aesthetically, it also improves readability of the mock file which otherwise would contain long illegible regular expressions repeated throughout the mock file.
@@ -31,6 +35,10 @@ Explanation:
 
 _Phew, that was quite a journey. We started with 'Apple-Kiwi-Oranges' and we ended it with 'Apple-Kiwi-Oranges'....wait a minute!_
 
+Parameters:
+
+1. Required: `name`, `value`
+
 ### `concat` Helper
 
 Usage: Concatenates multiple strings together, (static or dynamic), to form a single string.
@@ -40,6 +48,11 @@ Example:
 - `{{concat 'Camouflage ' 'is ' 'easy!!'}}` results in `Camouflage is easy`.
 - You can also pass in a delimiter, i.e. `{{concat '1' '22' '333' delimiter='-'}}` will result in `1-22-333`
 
+Parameters:
+
+1. Required: List of strings separated by a space eg: `'1' '22' '333'`
+2. Optional: `delimiter`
+
 ### `csv` helper
 
 Usage: CSV Helper allows you to provide a data source as an input along with several combinations of selection policies
@@ -47,6 +60,11 @@ Usage: CSV Helper allows you to provide a data source as an input along with sev
 - **With a key and value**: Specify the column name with `key` and the value you want to search with `value`. CSV helper returns the first row of the csv file where the value matches the row value in the specified column.
 - **Random**: Omitting key and value altogether and specifying `random=true` will fetch you one row at random.
 - **All**: Specifying `all=true`, fetches you the entire CSV file, do what you will with the data.
+
+Parameters:
+
+1. Required: Policy i.e. either `random=true` or `all=true` or a combination key/value i.e. `key='something' value='something'`
+2. Optional: `delimiter`. Default value: , (comma)
 
 !!! note
 
@@ -76,6 +94,10 @@ Here you are importing the file `uselessButResuableNow.mock`, Camouflage helper 
 ```
 
 This seems trivial and of no use but think bigger. Your mock file contains not just one but several responses and you select one of them based on a certain condition. You can break down your mocks into several files and import them as needed, making it easier to maintain.
+
+Parameters:
+
+1. Required: `path`
 
 ### `inject` Helper
 
@@ -149,12 +171,21 @@ Usage:
 4. **{{now format='unix'}}** - Time since epoch in seconds
 5. **{{now format='MM/DD/YYYY hh:mm:ss' offset='-10 days'}}** - Use offset to specify the delta for your desired date from the current date.
 
+Parameters:
+
+1. Optional: `format`, `offset`
+
 ### `num_between` Helper
 
 Usage:
 
 - **{{num_between lower=500 upper=600}}**: Generate a random number between two values.
 - **{{num_between lower=500 upper=600 lognormal=true}}**: Generate random numbers on a bell curve centered between two values.
+
+Parameters:
+
+1. Required: `lower`, `upper`
+2. Optional: `lognormal`
 
 ### `random` Helper
 
@@ -164,3 +195,7 @@ Usage:
 - **{{random type='ALPHANUMERIC'}}** - You can specify a type as well. Your choices are: 'ALPHANUMERIC', 'ALPHABETIC', 'NUMERIC' and 'UUID'.
 - **{{random type='NUMERIC' length=10}}** - Don't want a 16 character output? Use length to specify the length.
 - **{{random type='ALPHABETIC' uppercase=true}}** - Finally, specify uppercase as true to get a, well, uppercase string.
+
+Parameters:
+
+1. Optional: `type`, `length`, `uppercase`
