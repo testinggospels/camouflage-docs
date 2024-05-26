@@ -110,6 +110,10 @@
 <h3 id="array-helper"><code>array</code> Helper</h3>
 <p>Usage:</p>
 <p><strong>{{array source='Apple,Banana,Mango,Kiwi' delimiter=','}}</strong>: Generate an array from a source using given delimiter.</p>
+<p>Parameters:</p>
+<ol>
+<li>Required: <code>source</code>, <code>delimiter</code></li>
+</ol>
 <h3 id="assign-helper"><code>assign</code> Helper</h3>
 <p>Usage: Assign helper can be used to assign a value to a variable, by specifying a name value pair. This can be useful specially when using capture helper using regex and jsonpath selectors. Since running a regex or jsonpath operation is an expensive task, assign helper can be used to capture a value once, store it in a variable and use throughout the mock file. Aesthetically, it also improves readability of the mock file which otherwise would contain long illegible regular expressions repeated throughout the mock file.</p>
 <p>Following example shows the usage of a complex combination of helpers, i.e. assign, array, concat, and code.</p>
@@ -125,6 +129,10 @@
 <li><code>if</code>: Finally, we use <code>if</code> helper, to make a beautiful string. We concatenate the fruits with a hyphen (if the current fruit is not the last item in the array).</li>
 </ol>
 <p><em>Phew, that was quite a journey. We started with 'Apple-Kiwi-Oranges' and we ended it with 'Apple-Kiwi-Oranges'....wait a minute!</em></p>
+<p>Parameters:</p>
+<ol>
+<li>Required: <code>name</code>, <code>value</code></li>
+</ol>
 <h3 id="concat-helper"><code>concat</code> Helper</h3>
 <p>Usage: Concatenates multiple strings together, (static or dynamic), to form a single string.</p>
 <p>Example:</p>
@@ -132,6 +140,11 @@
 <li><code>{{concat 'Camouflage ' 'is ' 'easy!!'}}</code> results in <code>Camouflage is easy</code>.</li>
 <li>You can also pass in a delimiter, i.e. <code>{{concat '1' '22' '333' delimiter='-'}}</code> will result in <code>1-22-333</code></li>
 </ul>
+<p>Parameters:</p>
+<ol>
+<li>Required: List of strings separated by a space eg: <code>'1' '22' '333'</code></li>
+<li>Optional: <code>delimiter</code></li>
+</ol>
 <h3 id="csv-helper"><code>csv</code> helper</h3>
 <p>Usage: CSV Helper allows you to provide a data source as an input along with several combinations of selection policies</p>
 <ul>
@@ -139,6 +152,11 @@
 <li><strong>Random</strong>: Omitting key and value altogether and specifying <code>random=true</code> will fetch you one row at random.</li>
 <li><strong>All</strong>: Specifying <code>all=true</code>, fetches you the entire CSV file, do what you will with the data.</li>
 </ul>
+<p>Parameters:</p>
+<ol>
+<li>Required: Policy i.e. either <code>random=true</code> or <code>all=true</code> or a combination key/value i.e. <code>key='something' value='something'</code></li>
+<li>Optional: <code>delimiter</code>. Default value: , (comma)</li>
+</ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>All combinations of the policies return a JSON Array</p>
@@ -158,6 +176,10 @@ Content-Type: application/json
 <pre><code>{{now format='yyyy-MM-dd'}}
 </code></pre>
 <p>This seems trivial and of no use but think bigger. Your mock file contains not just one but several responses and you select one of them based on a certain condition. You can break down your mocks into several files and import them as needed, making it easier to maintain.</p>
+<p>Parameters:</p>
+<ol>
+<li>Required: <code>path</code></li>
+</ol>
 <h3 id="inject-helper"><code>inject</code> Helper</h3>
 <p><strong>Time for the forbidden fruit! The security vulnerability. Everything you have been taught not to do.</strong></p>
 <p>Inject helper allows you replace the hard coded values in your mock files with a javascript code, when you still want to use Camouflage's response builder but you want control over one or two fields.</p>
@@ -212,12 +234,21 @@ Content-Type: application/json
 <li><strong>{{now format='unix'}}</strong> - Time since epoch in seconds</li>
 <li><strong>{{now format='MM/DD/YYYY hh:mm:ss' offset='-10 days'}}</strong> - Use offset to specify the delta for your desired date from the current date.</li>
 </ol>
+<p>Parameters:</p>
+<ol>
+<li>Optional: <code>format</code>, <code>offset</code></li>
+</ol>
 <h3 id="num_between-helper"><code>num_between</code> Helper</h3>
 <p>Usage:</p>
 <ul>
 <li><strong>{{num_between lower=500 upper=600}}</strong>: Generate a random number between two values.</li>
 <li><strong>{{num_between lower=500 upper=600 lognormal=true}}</strong>: Generate random numbers on a bell curve centered between two values.</li>
 </ul>
+<p>Parameters:</p>
+<ol>
+<li>Required: <code>lower</code>, <code>upper</code></li>
+<li>Optional: <code>lognormal</code></li>
+</ol>
 <h3 id="random-helper"><code>random</code> Helper</h3>
 <p>Usage:</p>
 <ul>
@@ -226,6 +257,10 @@ Content-Type: application/json
 <li><strong>{{random type='NUMERIC' length=10}}</strong> - Don't want a 16 character output? Use length to specify the length.</li>
 <li><strong>{{random type='ALPHABETIC' uppercase=true}}</strong> - Finally, specify uppercase as true to get a, well, uppercase string.</li>
 </ul>
+<p>Parameters:</p>
+<ol>
+<li>Optional: <code>type</code>, <code>length</code>, <code>uppercase</code></li>
+</ol>
               
             </div>
           </div><footer>
